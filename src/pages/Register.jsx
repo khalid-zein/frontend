@@ -13,7 +13,7 @@ const Register = ({ setUser }) => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch("https://food-api-ivzo.onrender.com/users/signup", {
+    fetch("https://food-api-ivzo.onrender.com/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

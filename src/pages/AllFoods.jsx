@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Helmet from "../components/Helmet/Helmet";
 import CommonSection from "../components/UI/common-section/CommonSection";
-
 import { Container, Row, Col } from "reactstrap";
-
 import products from "../assets/fake-data/products";
 import ProductCard from "../components/UI/product-card/ProductCard";
 import ReactPaginate from "react-paginate";
-
+import Login from "./Login";
 import "../styles/all-foods.css";
 import "../styles/pagination.css";
 
@@ -39,7 +37,19 @@ const AllFoods = () => {
   const changePage = ({ selected }) => {
     setPageNumber(selected);
   };
+  const [currentUser, setCurrentUser] = useState('');
+  // Auth login
+  useEffect(()=>{
+    fetch("https://food-api-ivzo.onrender.com/auth")
+    .then(res =>{
+      if(res.ok){
+        res.json().then(user => setCurrentUser(user))
+      }
+    })
+  },[])
 
+  if(!currentUser) return <Login setCurrentUser={setCurrentUser} />
+  
   return (
     <Helmet title="All-Foods">
       <CommonSection title="All Foods" />
@@ -93,5 +103,6 @@ const AllFoods = () => {
     </Helmet>
   );
 };
+
 
 export default AllFoods;

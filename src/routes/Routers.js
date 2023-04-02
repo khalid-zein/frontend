@@ -16,7 +16,7 @@ const Routers = () => {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/home" />} />
-      <Route path="/home" element={<Home />} />
+      <Route path="/home" element={<Home user={user} setUser={setUser}/>} />
       <Route
         path="/foods"
         element={<AllFoods user={user} setUser={setUser} />}

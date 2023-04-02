@@ -11,7 +11,7 @@ const Login = ({ setUser }) => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch("https://food-api-ivzo.onrender.com/users/login", {
+    fetch("https://food-api-ivzo.onrender.com/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -22,7 +22,7 @@ const Login = ({ setUser }) => {
         res.json().then((user) => {
           console.log(user);
           setUser(user);
-          navigate("/foods");
+          navigate("/home");
         });
       }
     });
