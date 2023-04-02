@@ -4,7 +4,7 @@ import { Container, Row, Col } from "reactstrap";
 import CommonSection from "../components/UI/common-section/CommonSection";
 import Helmet from "../components/Helmet/Helmet";
 
-const Login = ({ setUser }) => {
+const Login = (setUser) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
