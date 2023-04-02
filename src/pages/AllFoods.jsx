@@ -48,7 +48,11 @@ const AllFoods = () => {
     })
   },[])
 
-  if(!currentUser) return <Login setCurrentUser={setCurrentUser} />
+  // if(!currentUser) return <Login setCurrentUser={setCurrentUser} />
+  if(currentUser) { 
+    navigate="/foods"}
+  else
+    return <Login setCurrentUser={setCurrentUser} />
   
   return (
     <Helmet title="All-Foods">
