@@ -10,6 +10,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import { useState } from "react";
 import Reviews from "../components/UI/reviews/reviews";
+import ProtectedRoutes from "./proutes";
 
 const Routers = () => {
   const [user, setUser] = useState(null);
@@ -27,7 +28,9 @@ const Routers = () => {
       <Route path="/login" element={<Login setUser={setUser} />} />
       <Route path="/register" element={<Register setUser={setUser} />} />
       <Route path="/contact" element={<Contact />} />
-      <Route path="/reviews" element={<Reviews />} />
+      <Route element={<ProtectedRoutes />}>
+         <Route path="/reviews" element={<Reviews />} />
+      </Route>
     </Routes>
   );
 };
