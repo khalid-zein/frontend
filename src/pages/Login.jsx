@@ -23,7 +23,7 @@ const Login = ( {setUser} ) => {
         res
          .json()
          .then((user) => setUser(user))
-         .then(navigate("/food"))
+         .then(navigate("/foods"))
       }
     });
   }
