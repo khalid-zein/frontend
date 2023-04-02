@@ -29,7 +29,7 @@ const Register = ( {setUser} ) => {
         res.json().then((user) => {
           console.log(user);
           setUser(user);
-          navigate("/foods");
+          navigate("/");
         });
       }
     });
