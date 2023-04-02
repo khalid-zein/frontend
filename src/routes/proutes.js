@@ -1,10 +1,11 @@
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
 import Login from "../pages/Login";
 
 // const navigate = useNavigate();
 function ProtectedRoutes() {
+const navigate = useNavigate();
 const [currentUser, setCurrentUser] = useState('');
 // Auth login
 useEffect(()=>{
@@ -16,7 +17,11 @@ useEffect(()=>{
   })
 },[])
 
-if(!currentUser) return <Login setCurrentUser={setCurrentUser} />
+// if(!currentUser) return <Login setCurrentUser={setCurrentUser} />
+if(currentUser) {
+  navigate("/reviews")
+}
+  return <Login setCurrentUser={setCurrentUser} />
 };
 export default ProtectedRoutes;
 // if(currentUser) 
