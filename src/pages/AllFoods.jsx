@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Helmet from "../components/Helmet/Helmet";
 import CommonSection from "../components/UI/common-section/CommonSection";
 import { Container, Row, Col } from "reactstrap";
@@ -37,6 +38,7 @@ const AllFoods = () => {
   const changePage = ({ selected }) => {
     setPageNumber(selected);
   };
+  const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState('');
   // Auth login
   useEffect(()=>{
@@ -49,8 +51,7 @@ const AllFoods = () => {
   },[])
 
   // if(!currentUser) return <Login setCurrentUser={setCurrentUser} />
-  if(currentUser) { 
-    navigate="/foods"}
+  if(currentUser) {navigate("/foods")}
   else
     return <Login setCurrentUser={setCurrentUser} />
   
