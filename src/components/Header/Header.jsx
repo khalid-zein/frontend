@@ -25,7 +25,7 @@ const nav__links = [
   },
   {
     display: "Customer Reviews",
-    path: "reviews",
+    path: "/reviews",
   },
 ];
 
