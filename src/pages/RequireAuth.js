@@ -1,13 +1,23 @@
-import React from 'react'
-import { useAuth } from './auth'
+import React, {useEffect, useState} from 'react'
+// import { useAuth } from './auth'
 import {Navigate, useLocation} from 'react-router-dom'
 
 export default function RequireAuth({children}){
 
     const location = useLocation()
-    const auth = useAuth()
+    // const auth = useAuth()
+    const [currentUser, setCurrentUser] = useState('');
 
-    if(!auth.user){
+    useEffect(()=>{
+        fetch("https://food-api-ivzo.onrender.com/auth")
+        .then(res =>{
+          if(res.ok){
+            res.json().then(user => setCurrentUser(user))
+          }
+        })
+    },[])
+
+    if(!currentUser){
         return <Navigate to='/login' state={{path: location.pathname}}/>
     }
 
