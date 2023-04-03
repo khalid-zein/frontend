@@ -1,12 +1,19 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { Container, Row, Col } from "reactstrap";
 import CommonSection from "../components/UI/common-section/CommonSection";
 import Helmet from "../components/Helmet/Helmet";
+import { useAuth } from "./auth";
 
-const Login = ( {setUser} ) => {
+const Login = () => {
+  const [user, setUser] = useState('');
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState([]);
+	const auth = useAuth()
+  const location = useLocation()
+
+	const redirectPath = location.state?.path || '/'
   const navigate = useNavigate();
 
   function handleSubmit(e) {
@@ -22,8 +29,12 @@ const Login = ( {setUser} ) => {
         // res.json().then((user) => {console.log(user);setUser(user);navigate("/home");});
         res
          .json()
-         .then((user) => setUser(user))
-         .then(navigate("/"))
+         .then((user) => setUser(user));
+         auth.login(user)
+         navigate(redirectPath, {replace: true});
+        //  .then(navigate("/"))
+      }else{
+        res.json().then((errorData) => setErrors(errorData.error))
       }
     });
   }

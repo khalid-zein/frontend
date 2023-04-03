@@ -1,35 +1,40 @@
 import React, { useRef, useEffect } from "react";
 import { Container } from "reactstrap";
 import logo from "../../assets/images/res-logo.png";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { cartUiActions } from "../../store/shopping-cart/cartUiSlice";
 import "../../styles/header.css";
 
-const nav__links = [
-  {
-    display: "Home",
-    path: "/home",
-  },
-  {
-    display: "Foods",
-    path: "/foods",
-  },
-  {
-    display: "Cart",
-    path: "/cart",
-  },
-  {
-    display: "Contact",
-    path: "/contact",
-  },
-  {
-    display: "Customer Reviews",
-    path: "/reviews",
-  },
-];
+// const nav__links = [
+//   {
+//     display: "Home",
+//     path: "/home",
+//   },
+//   {
+//     display: "Foods",
+//     path: "/foods",
+//   },
+//   {
+//     display: "Cart",
+//     path: "/cart",
+//   },
+//   {
+//     display: "Contact",
+//     path: "/contact",
+//   },
+//   {
+//     display: "Customer Reviews",
+//     path: "/reviews",
+//   },
+//   {
+//     display: "Logout",
+//     path: "/logout",
+//     onClick: {handleLogoutClick}
+//   },
+// ];
 
-const Header = () => {
+const Header = ({user, setUser}) => {
   const menuRef = useRef(null);
   const headerRef = useRef(null);
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
@@ -40,6 +45,34 @@ const Header = () => {
   const toggleCart = () => {
     dispatch(cartUiActions.toggle());
   };
+
+  const nav__links = [
+    {
+      display: "Home",
+      path: "/home",
+    },
+    {
+      display: "Foods",
+      path: "/foods",
+    },
+    {
+      display: "Cart",
+      path: "/cart",
+    },
+    {
+      display: "Contact",
+      path: "/contact",
+    },
+    {
+      display: "Customer Reviews",
+      path: "/reviews",
+    },
+    {
+      display: "Logout",
+      path: "/logout",
+      onClick: {handleLogoutClick}
+    },
+  ];
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -55,6 +88,17 @@ const Header = () => {
 
     return () => window.removeEventListener("scroll");
   }, []);
+
+  const navigate = useNavigate()
+  function handleLogoutClick() {
+      fetch("https://food-api-ivzo.onrender.com/logout", { method: "DELETE" })
+      .then((res) => {
+        if (res.ok) {
+          setUser(null);
+          navigate('/login')
+        }
+      });
+  }
 
   return (
     <header className="header" ref={headerRef}>
