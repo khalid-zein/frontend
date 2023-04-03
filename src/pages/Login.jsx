@@ -29,7 +29,7 @@ const Login = () => {
         // res.json().then((user) => {console.log(user);setUser(user);navigate("/home");});
         res
          .json()
-         .then((user) => setUser(user));
+         .then((user) => console.log(user));
          auth.login(user)
          navigate(redirectPath, {replace: true});
         //  .then(navigate("/"))
